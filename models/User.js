@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
 const UserSchema = new Schema(
     {
@@ -39,6 +40,17 @@ const UserSchema = new Schema(
         id: false
     }
 );
+
+UserSchema.path('username').validate(async (username) => {
+    const usernameCount = await mongoose.models.User.countDocuments({ username });
+    return !usernameCount;
+}, 'Username already exists');
+
+UserSchema.path('email').validate(async (email) => {
+    const emailCount = await mongoose.models.User.countDocuments({ email });
+    return !emailCount;
+}, 'Email already exists');
+
 
 // create the User model using the UserSchema
 const User = model('User', UserSchema);
