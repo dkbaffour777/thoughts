@@ -36,7 +36,7 @@ const ThoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
-            required: "Please enter your username",
+            required: "Please enter your thought",
             trim: true
         },
         createdAt: {
