@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const ReactionSchema = new Schema(
@@ -11,11 +11,12 @@ const ReactionSchema = new Schema(
         reactionBody: {
             type: String,
             trim: true,
-            max: 280,
+            maxLength: 280,
             required: "Please add a reaction"
         },
         username: {
             type: String,
+            trim: true,
             required: "Please enter your username"
         },
         createdAt: {
